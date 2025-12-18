@@ -1,0 +1,31 @@
+.content {
+  flex: 1;
+  background-color: #f8f9fa;
+}
+.card-body{
+    background: var(--background);
+}
+.card{
+ border-radius: 20px;
+}
+
+/* / Make table fully transparent inside cards / */
+.card table,
+.card thead,
+.card tbody,
+.card tr,
+.card th,
+.card td {
+  background-color: transparent !important;
+}
+
+/* / Optional: soft hover effect / */
+.card .table-hover tbody tr:hover {
+  background-color: rgba(89, 84, 84, 0.08);
+}
+
+/* / White table borders */ */
+.card .table th,
+.card .table td {
+border-color: #fff !important;
+}

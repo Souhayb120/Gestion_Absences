@@ -4,78 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <title>Dashboard Layout</title>
+    <title></title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
         integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 
-<body class="bg-blue-200  flex justify-center">
-
-  
-    <header class="fixed top-0 left-0 w-full h-14 bg-[#183862] text-white flex items-center justify-between px-4 z-50">
-
-        <!-- Mobile menu button -->
-        <button id="menuBtn" class="md:hidden text-2xl">
-            <i class="fa-solid fa-bars"></i>
-        </button>
-
-        <img src="Pictures/Logo (2).png" class="h-15"alt="Logo">
-
-        <div class="flex gap-2">
-            <img class="size-5 invert brightness-0" src="Pictures/Profil.png">
-            <span>Souhayb</span>
-        </div>
-    </header>
-
-   
-    <aside id="sidebar"
-        class="fixed top-14 left-0 w-56 h-[calc(100%-3.5rem)] bg-[#183862] text-white
-               transform -translate-x-full md:translate-x-0 transition-transform duration-300 z-40">
-
-        <nav class="flex flex-col justify-between h-full">
-
-            <div class="flex flex-col gap-3 p-4">
-
-                <a href="#" class="flex items-center gap-3 px-3 py-2 rounded hover:bg-sky-800">
-                    <img class="size-5 invert brightness-0" src="Pictures/Home.png">
-                    Dashboard
-                </a>
-
-                <a href="#" class="flex items-center gap-3 px-3 py-2 rounded hover:bg-sky-800">
-                    <img class="size-5 invert brightness-0" src="Pictures/Students.png">
-                    Etudiant
-                </a>
-
-                <a href="#" class="flex items-center gap-3 px-3 py-2 rounded hover:bg-sky-800">
-                    <img class="size-5 invert brightness-0" src="Pictures/Absence.png">
-                    Presence
-                </a>
-
-                <a href="#" class="flex items-center gap-3 px-3 py-2 rounded hover:bg-sky-800">
-                    <img class="size-5 invert brightness-0" src="Pictures/History.png">
-                    Historique
-                </a>
-
-            </div>
-
-            <div class="p-4">
-                <a href="#" class="flex items-center gap-3 px-3 py-2 rounded hover:bg-sky-800">
-                    <img class="size-5 invert brightness-0" src="Pictures/logout.png">
-                    <span class="text-red-400">Deconnexion</span>
-                </a>
-            </div>
-
-        </nav>
-    </aside>
+<body class="flex justify-center">
 
 
-    <main class="pt-16 md:pl-56 px-4">
 
-      
-         <div class=" bg-slate-00 h-[100vh] sm:w-100 md:w-32 lg:w-[100%] pl-4 pr-4">
-        <h1 class="text-5xl  text-blue-950 mb-4">Statistique</h1>
+
+
+    
+    <div class="container bg-slate-100 h-[100vh] mr-4 ml-4 sm:w-100 md:w-32 lg:w-[100%]">
+        <h1 class="text-4xl mb-4">Statistique</h1>
         <section class="flex flex-col  md:flex-row lg:flex-row  gap-4  text-cyan-50 ">
 
             <!-- Card 1 -->
@@ -200,11 +144,11 @@
 
 
 
-        <section class="myTable mt-10 bg-blue-950  h-85  rounded px-10 ">
-            <div class="flex pt-2 pl-2 pb-2 items-center ">
+        <section class="myTable mt-10 bg-blue-950  h-80 rounded px-10 ">
+            <div class="flex pt-2 pl-2 pb-2 items-center">
                 <i class="fa-regular fa-hourglass fa-2x p-2 rounded font-bold text-yellow-500"></i>
 
-                <h1 class="text-white text-3xl">Top 3 - Plus Retard</h1>
+                <h1 class="text-white text-3xl">Top 3 - Plus absents</h1>
             </div>
             <hr class="text-green-400  pt-2 pb-2">
 
@@ -283,17 +227,7 @@
 
         </section>
     </div>
-    </main>
 
-    <!-- ================= Mobile toggle ================= -->
-    <script>
-        const menuBtn = document.getElementById("menuBtn");
-        const sidebar = document.getElementById("sidebar");
-
-        menuBtn.addEventListener("click", () => {
-            sidebar.classList.toggle("-translate-x-full");
-        });
-    </script>
     <script src="tailwind.config.js"></script>
 </body>
 
