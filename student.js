@@ -3,6 +3,25 @@
 
 let students = [];
 let nextId = 1;
+// LOCAL STORAGE
+
+function saveToLocalStorage() {
+  localStorage.setItem("students", JSON.stringify(students));
+  localStorage.setItem("nextId", nextId);
+}
+
+function loadFromLocalStorage() {
+  const storedStudents = localStorage.getItem("students");
+  const storedNextId = localStorage.getItem("nextId");
+
+  if (storedStudents) {
+    students = JSON.parse(storedStudents);
+  }
+
+  if (storedNextId) {
+    nextId = parseInt(storedNextId);
+  }
+}
 
 
 // 2. ÉLÉMENTS HTML
@@ -137,7 +156,7 @@ form.addEventListener("submit", function(e) {
     student.group = inputGroup.value;
     student.status = statusValue;
   }
-
+saveToLocalStorage();
   renderStudents();
   closeModal();
 });
@@ -148,6 +167,7 @@ form.addEventListener("submit", function(e) {
 function deleteStudent(id) {
   if (!confirm("Supprimer cet étudiant ?")) return;
   students = students.filter(s => s.id !== id);
+  saveToLocalStorage();
   renderStudents();
 }
 
@@ -178,5 +198,5 @@ searchInput.addEventListener("input", function() {
 
 
 // 12. DÉMARRAGE
-
+loadFromLocalStorage();
 renderStudents();
