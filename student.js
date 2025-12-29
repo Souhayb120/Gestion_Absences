@@ -3,6 +3,25 @@
 
 let students = [];
 let nextId = 1;
+// LOCAL STORAGE
+
+function saveToLocalStorage() {
+  localStorage.setItem("students", JSON.stringify(students));
+  localStorage.setItem("nextId", nextId);
+}
+
+function loadFromLocalStorage() {
+  const storedStudents = localStorage.getItem("students");
+  const storedNextId = localStorage.getItem("nextId");
+
+  if (storedStudents) {
+    students = JSON.parse(storedStudents);
+  }
+
+  if (storedNextId) {
+    nextId = parseInt(storedNextId);
+  }
+}
 
 
 // LOCAL STORAGE
@@ -159,6 +178,7 @@ form.addEventListener("submit", function(e) {
     student.group = inputGroup.value;
     student.status = statusValue;
   }
+saveToLocalStorage();
   saveToLocalStorage();
   renderStudents();
   closeModal();
@@ -200,6 +220,7 @@ searchInput.addEventListener("input", function() {
 });
 
 
+// 12. DÉMARRAGE
 //  DEMARRAGE
 loadFromLocalStorage();
 renderStudents();
