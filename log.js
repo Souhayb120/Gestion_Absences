@@ -8,7 +8,7 @@ submit.addEventListener('click', () => {
     localStorage.setItem('username', username.value);
     localStorage.setItem('password', password.value);
     if (localStorage.getItem('password') == "123") {
-        window.location.href = 'index.html';
+        window.location.href = 'dashboard.html';
        
     } else {
         console.log('errore')
