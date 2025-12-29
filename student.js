@@ -24,6 +24,7 @@ function loadFromLocalStorage() {
     nextId = parseInt(storedNextId);
   }
 }
+console.log("test localStorage");
 
 
 // ELEMENTS HTML ,,,
