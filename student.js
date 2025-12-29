@@ -1,8 +1,28 @@
-
 // 1. DONNÉES
 
 let students = [];
 let nextId = 1;
+
+
+// LOCAL STORAGE HELPERS
+
+function saveToLocalStorage() {
+  localStorage.setItem("students", JSON.stringify(students));
+  localStorage.setItem("nextId", nextId);
+}
+
+function loadFromLocalStorage() {
+  const storedStudents = localStorage.getItem("students");
+  const storedNextId = localStorage.getItem("nextId");
+
+  if (storedStudents) {
+    students = JSON.parse(storedStudents);
+  }
+
+  if (storedNextId) {
+    nextId = parseInt(storedNextId, 10);
+  }
+}
 
 
 // 2. ÉLÉMENTS HTML
@@ -43,10 +63,10 @@ function renderStudents(list = students) {
         <button onclick="deleteStudent(${student.id})" class="text-red-400">Delete</button>
       </td>
     `;
-    tableBody.appendChild(row); // ajout d'une ligne
+    tableBody.appendChild(row);
   });
 
-  updateStats(); // mettre à jour les compteurs
+  updateStats();
 }
 
 
@@ -54,7 +74,7 @@ function renderStudents(list = students) {
 
 function updateStats() {
   totalCount.textContent = students.length;
-  activeCount.textContent = students.filter(student=> student.status === "Active").length;
+  activeCount.textContent = students.filter(student => student.status === "Active").length;
   inactiveCount.textContent = students.filter(student => student.status === "Inactive").length;
 }
 
@@ -66,20 +86,17 @@ function openModal(mode = "add") {
   form.reset();
   inputId.value = "";
   enableInputs(true);
-  modalTitle.textContent = mode === "add" ? "Ajouter un étudiant" : modalTitle.textContent;
-
-
 
   if (mode === "view") {
-    enableInputs(false); // rendre les champs lecture seule
-    form.querySelector("button[type='submit']").style.display = "none"; // pour cacher le bouton enregistrer
+    enableInputs(false);
+    form.querySelector("button[type='submit']").style.display = "none";
+    modalTitle.textContent = "Détails de l'étudiant";
   } else {
-    enableInputs(true);
-    form.querySelector("button[type='submit']").style.display = "block"; // montrer le bouton
-    modalTitle.textContent = mode === "add" ? "Ajouter un étudiant" : "Modifier l'étudiant";
+    form.querySelector("button[type='submit']").style.display = "block";
+    modalTitle.textContent =
+      mode === "add" ? "Ajouter un étudiant" : "Modifier l'étudiant";
   }
 }
-
 
 function closeModal() {
   modal.classList.add("hidden");
@@ -92,10 +109,8 @@ function viewStudent(id) {
   const student = students.find(s => s.id === id);
   if (!student) return;
   openModal("view");
-  modalTitle.textContent = "Détails de l'étudiant";
   fillForm(student);
 }
-
 
 
 // 7. EDIT
@@ -103,20 +118,20 @@ function viewStudent(id) {
 function editStudent(id) {
   const student = students.find(s => s.id === id);
   if (!student) return;
-  openModal();
-  modalTitle.textContent = "Modifier l'étudiant";
+  openModal("edit");
   fillForm(student);
-  enableInputs(true);
   inputId.value = id;
 }
 
+
 // 8. AJOUT / MODIFICATION
-form.addEventListener("submit", function(e) {
+
+form.addEventListener("submit", function (e) {
   e.preventDefault();
   const id = inputId.value;
 
-  // Valeur du statut toujours "Active" ou "Inactive"
-  const statusValue = inputStatus.value === "Active" ? "Active" : "Inactive";
+  const statusValue =
+    inputStatus.value === "Active" ? "Active" : "Inactive";
 
   if (id === "") {
     // AJOUT
@@ -125,7 +140,7 @@ form.addEventListener("submit", function(e) {
       name: inputName.value,
       email: inputEmail.value,
       group: inputGroup.value,
-      status: statusValue
+      status: statusValue,
     });
     nextId++;
   } else {
@@ -138,6 +153,7 @@ form.addEventListener("submit", function(e) {
     student.status = statusValue;
   }
 
+  saveToLocalStorage();
   renderStudents();
   closeModal();
 });
@@ -148,6 +164,7 @@ form.addEventListener("submit", function(e) {
 function deleteStudent(id) {
   if (!confirm("Supprimer cet étudiant ?")) return;
   students = students.filter(s => s.id !== id);
+  saveToLocalStorage();
   renderStudents();
 }
 
@@ -171,12 +188,15 @@ function enableInputs(active) {
 
 // 11. RECHERCHE
 
-searchInput.addEventListener("input", function() {
+searchInput.addEventListener("input", function () {
   const text = this.value.toLowerCase();
-  renderStudents(students.filter(s => s.name.toLowerCase().includes(text)));
+  renderStudents(
+    students.filter(s => s.name.toLowerCase().includes(text))
+  );
 });
 
 
 // 12. DÉMARRAGE
 
+loadFromLocalStorage();
 renderStudents();
