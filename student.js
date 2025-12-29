@@ -24,27 +24,6 @@ function loadFromLocalStorage() {
 }
 
 
-// LOCAL STORAGE
-
-function saveToLocalStorage() {
-  localStorage.setItem("students", JSON.stringify(students));
-  localStorage.setItem("nextId", nextId);
-}
-
-function loadFromLocalStorage() {
-  const storedStudents = localStorage.getItem("students");
-  const storedNextId = localStorage.getItem("nextId");
-
-  if (storedStudents) {
-    students = JSON.parse(storedStudents);
-  }
-
-  if (storedNextId) {
-    nextId = parseInt(storedNextId);
-  }
-}
-console.log("test localStorage");
-
 
 // ELEMENTS HTML ,,,
 
