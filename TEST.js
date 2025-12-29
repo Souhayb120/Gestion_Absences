@@ -37,6 +37,8 @@ function afficherDetails(day) {
 
   detailDate.textContent = `Details - ${day.date}`;
 
+  
+
   if (day.absents.length > 0) {
     const title = document.createElement("p");
     absentsContainer.appendChild(title);
