@@ -1,5 +1,5 @@
 
-// 1. DONNÉES
+// DONNEES
 
 let students = [];
 let nextId = 1;
@@ -24,7 +24,29 @@ function loadFromLocalStorage() {
 }
 
 
-// 2. ÉLÉMENTS HTML
+// LOCAL STORAGE
+
+function saveToLocalStorage() {
+  localStorage.setItem("students", JSON.stringify(students));
+  localStorage.setItem("nextId", nextId);
+}
+
+function loadFromLocalStorage() {
+  const storedStudents = localStorage.getItem("students");
+  const storedNextId = localStorage.getItem("nextId");
+
+  if (storedStudents) {
+    students = JSON.parse(storedStudents);
+  }
+
+  if (storedNextId) {
+    nextId = parseInt(storedNextId);
+  }
+}
+console.log("test localStorage");
+
+
+// ELEMENTS HTML ,,,
 
 const tableBody = document.getElementById("studentTableBody");
 const modal = document.getElementById("studentModal");
@@ -44,7 +66,7 @@ const inactiveCount = document.getElementById("inactiveCount");
 const searchInput = document.getElementById("searchInput");
 
 
-// 3. AFFICHER LES ÉTUDIANTS
+// AFFICHER LES ETUDIANTS
 
 function renderStudents(list = students) {
   tableBody.innerHTML = "";
@@ -69,7 +91,7 @@ function renderStudents(list = students) {
 }
 
 
-// 4. COMPTEURS
+// COMPTEURS
 
 function updateStats() {
   totalCount.textContent = students.length;
@@ -78,7 +100,7 @@ function updateStats() {
 }
 
 
-// 5. MODAL
+//  MODAL
 
 function openModal(mode = "add") {
   modal.classList.remove("hidden");
@@ -105,7 +127,7 @@ function closeModal() {
 }
 
 
-// 6. VIEW
+//  VIEW
 
 function viewStudent(id) {
   const student = students.find(s => s.id === id);
@@ -117,7 +139,7 @@ function viewStudent(id) {
 
 
 
-// 7. EDIT
+//  EDIT
 
 function editStudent(id) {
   const student = students.find(s => s.id === id);
@@ -129,7 +151,7 @@ function editStudent(id) {
   inputId.value = id;
 }
 
-// 8. AJOUT / MODIFICATION
+//  AJOUT / MODIFICATION
 form.addEventListener("submit", function(e) {
   e.preventDefault();
   const id = inputId.value;
@@ -138,7 +160,7 @@ form.addEventListener("submit", function(e) {
   const statusValue = inputStatus.value === "Active" ? "Active" : "Inactive";
 
   if (id === "") {
-    // AJOUT
+    // L'AJOUT
     students.push({
       id: nextId,
       name: inputName.value,
@@ -157,12 +179,13 @@ form.addEventListener("submit", function(e) {
     student.status = statusValue;
   }
 saveToLocalStorage();
+  saveToLocalStorage();
   renderStudents();
   closeModal();
 });
 
 
-// 9. SUPPRIMER
+//  SUPPRIMER
 
 function deleteStudent(id) {
   if (!confirm("Supprimer cet étudiant ?")) return;
@@ -172,7 +195,7 @@ function deleteStudent(id) {
 }
 
 
-// 10. OUTILS
+//  OUTILS
 
 function fillForm(student) {
   inputName.value = student.name;
@@ -189,7 +212,7 @@ function enableInputs(active) {
 }
 
 
-// 11. RECHERCHE
+// RECHERCHE
 
 searchInput.addEventListener("input", function() {
   const text = this.value.toLowerCase();
@@ -198,5 +221,6 @@ searchInput.addEventListener("input", function() {
 
 
 // 12. DÉMARRAGE
+//  DEMARRAGE
 loadFromLocalStorage();
 renderStudents();
