@@ -117,11 +117,13 @@ function viewStudent(id) {
 function editStudent(id) {
   const student = students.find(s => s.id === id);
   if (!student) return;
-  openModal();
+  openModal("edit");
   modalTitle.textContent = "Modifier l'étudiant";
   fillForm(student);
   enableInputs(true);
   inputId.value = id;
+  form.querySelector("button[type='submit']").style.display = "block"; // pour cacher le bouton enregistrer
+
 }
 
 //  AJOUT / MODIFICATION
