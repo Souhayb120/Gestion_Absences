@@ -1,3 +1,5 @@
+// 1. DONNÉES
+=======
 
 // DONNEES
 
@@ -24,6 +26,29 @@ function loadFromLocalStorage() {
 }
 
 
+// LOCAL STORAGE HELPERS
+
+function saveToLocalStorage() {
+  localStorage.setItem("students", JSON.stringify(students));
+  localStorage.setItem("nextId", nextId);
+}
+
+function loadFromLocalStorage() {
+  const storedStudents = localStorage.getItem("students");
+  const storedNextId = localStorage.getItem("nextId");
+
+  if (storedStudents) {
+    students = JSON.parse(storedStudents);
+  }
+
+  if (storedNextId) {
+    nextId = parseInt(storedNextId, 10);
+  }
+}
+
+
+// 2. ÉLÉMENTS HTML
+=======
 
 // ELEMENTS HTML ,,,
 
@@ -63,10 +88,10 @@ function renderStudents(list = students) {
         <button onclick="deleteStudent(${student.id})" class="text-red-400">Delete</button>
       </td>
     `;
-    tableBody.appendChild(row); // ajout d'une ligne
+    tableBody.appendChild(row);
   });
 
-  updateStats(); // mettre à jour les compteurs
+  updateStats();
 }
 
 
@@ -74,7 +99,7 @@ function renderStudents(list = students) {
 
 function updateStats() {
   totalCount.textContent = students.length;
-  activeCount.textContent = students.filter(student=> student.status === "Active").length;
+  activeCount.textContent = students.filter(student => student.status === "Active").length;
   inactiveCount.textContent = students.filter(student => student.status === "Inactive").length;
 }
 
@@ -88,8 +113,17 @@ function openModal(mode = "add") {
   enableInputs(true);
   modalTitle.textContent = mode === "add" ? "Ajouter un étudiant" : modalTitle.textContent;
 
-}
 
+
+  if (mode === "view") {
+    enableInputs(false); // rendre les champs lecture seule
+    form.querySelector("button[type='submit']").style.display = "none"; // pour cacher le bouton enregistrer
+  } else {
+    enableInputs(true);
+    form.querySelector("button[type='submit']").style.display = "block"; // montrer le bouton
+    modalTitle.textContent = mode === "add" ? "Ajouter un étudiant" : "Modifier l'étudiant";
+  }
+}
 
 function closeModal() {
   modal.classList.add("hidden");
@@ -120,19 +154,23 @@ function editStudent(id) {
   openModal("edit");
   modalTitle.textContent = "Modifier l'étudiant";
   fillForm(student);
-  enableInputs(true);
+    enableInputs(true);
   inputId.value = id;
   form.querySelector("button[type='submit']").style.display = "block"; // pour cacher le bouton enregistrer
 
 }
 
+
+// 8. AJOUT / MODIFICATION
+
+form.addEventListener("submit", function (e) {
 //  AJOUT / MODIFICATION
 form.addEventListener("submit", function(e) {
   e.preventDefault();
   const id = inputId.value;
 
-  // Valeur du statut toujours "Active" ou "Inactive"
-  const statusValue = inputStatus.value === "Active" ? "Active" : "Inactive";
+  const statusValue =
+    inputStatus.value === "Active" ? "Active" : "Inactive";
 
   if (id === "") {
     // L'AJOUT
@@ -141,7 +179,7 @@ form.addEventListener("submit", function(e) {
       name: inputName.value,
       email: inputEmail.value,
       group: inputGroup.value,
-      status: statusValue
+      status: statusValue,
     });
     nextId++;
   } else {
@@ -188,11 +226,12 @@ function enableInputs(active) {
 
 // RECHERCHE
 
-searchInput.addEventListener("input", function() {
+searchInput.addEventListener("input", function () {
   const text = this.value.toLowerCase();
-  renderStudents(students.filter(s => s.name.toLowerCase().includes(text)));
+  renderStudents(
+    students.filter(s => s.name.toLowerCase().includes(text))
+  );
 });
-
 
 //  DEMARRAGE
 loadFromLocalStorage();
