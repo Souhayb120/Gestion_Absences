@@ -88,16 +88,6 @@ function openModal(mode = "add") {
   enableInputs(true);
   modalTitle.textContent = mode === "add" ? "Ajouter un étudiant" : modalTitle.textContent;
 
-
-
-  if (mode === "view") {
-    enableInputs(false); // rendre les champs lecture seule
-    form.querySelector("button[type='submit']").style.display = "none"; // pour cacher le bouton enregistrer
-  } else {
-    enableInputs(true);
-    form.querySelector("button[type='submit']").style.display = "block"; // montrer le bouton
-    modalTitle.textContent = mode === "add" ? "Ajouter un étudiant" : "Modifier l'étudiant";
-  }
 }
 
 
@@ -111,9 +101,13 @@ function closeModal() {
 function viewStudent(id) {
   const student = students.find(s => s.id === id);
   if (!student) return;
-  openModal("view");
+  openModal();
   modalTitle.textContent = "Détails de l'étudiant";
   fillForm(student);
+  enableInputs(false); // rendre les champs lecture seule
+  form.querySelector("button[type='submit']").style.display = "none"; // pour cacher le bouton enregistrer
+
+
 }
 
 
@@ -157,7 +151,6 @@ form.addEventListener("submit", function(e) {
     student.group = inputGroup.value;
     student.status = statusValue;
   }
-saveToLocalStorage();
   saveToLocalStorage();
   renderStudents();
   closeModal();
@@ -199,7 +192,6 @@ searchInput.addEventListener("input", function() {
 });
 
 
-// 12. DÉMARRAGE
 //  DEMARRAGE
 loadFromLocalStorage();
 renderStudents();
