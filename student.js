@@ -1,9 +1,7 @@
-<<<<<<< HEAD
 // 1. DONNÉES
 =======
 
 // DONNEES
->>>>>>> 67bf7a8c1849670103cabf3df6f50351860b77b9
 
 let students = [];
 let nextId = 1;
@@ -28,7 +26,6 @@ function loadFromLocalStorage() {
 }
 
 
-<<<<<<< HEAD
 // LOCAL STORAGE HELPERS
 
 function saveToLocalStorage() {
@@ -54,7 +51,6 @@ function loadFromLocalStorage() {
 =======
 
 // ELEMENTS HTML ,,,
->>>>>>> 67bf7a8c1849670103cabf3df6f50351860b77b9
 
 const tableBody = document.getElementById("studentTableBody");
 const modal = document.getElementById("studentModal");
@@ -160,19 +156,16 @@ function editStudent(id) {
   fillForm(student);
     enableInputs(true);
   inputId.value = id;
- form.querySelector("button[type='submit']").style.display = "block"; // pour cacher le bouton enregistrer
+  form.querySelector("button[type='submit']").style.display = "block"; // pour cacher le bouton enregistrer
 
 }
 
-<<<<<<< HEAD
 
 // 8. AJOUT / MODIFICATION
 
 form.addEventListener("submit", function (e) {
-=======
 //  AJOUT / MODIFICATION
 form.addEventListener("submit", function(e) {
->>>>>>> 67bf7a8c1849670103cabf3df6f50351860b77b9
   e.preventDefault();
   const id = inputId.value;
 
