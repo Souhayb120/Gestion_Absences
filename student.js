@@ -1,9 +1,34 @@
+<<<<<<< HEAD
 // 1. DONNÉES
+=======
+
+// DONNEES
+>>>>>>> 67bf7a8c1849670103cabf3df6f50351860b77b9
 
 let students = [];
 let nextId = 1;
+// LOCAL STORAGE
+
+function saveToLocalStorage() {
+  localStorage.setItem("students", JSON.stringify(students));
+  localStorage.setItem("nextId", nextId);
+}
+
+function loadFromLocalStorage() {
+  const storedStudents = localStorage.getItem("students");
+  const storedNextId = localStorage.getItem("nextId");
+
+  if (storedStudents) {
+    students = JSON.parse(storedStudents);
+  }
+
+  if (storedNextId) {
+    nextId = parseInt(storedNextId);
+  }
+}
 
 
+<<<<<<< HEAD
 // LOCAL STORAGE HELPERS
 
 function saveToLocalStorage() {
@@ -26,6 +51,10 @@ function loadFromLocalStorage() {
 
 
 // 2. ÉLÉMENTS HTML
+=======
+
+// ELEMENTS HTML ,,,
+>>>>>>> 67bf7a8c1849670103cabf3df6f50351860b77b9
 
 const tableBody = document.getElementById("studentTableBody");
 const modal = document.getElementById("studentModal");
@@ -45,7 +74,7 @@ const inactiveCount = document.getElementById("inactiveCount");
 const searchInput = document.getElementById("searchInput");
 
 
-// 3. AFFICHER LES ÉTUDIANTS
+// AFFICHER LES ETUDIANTS
 
 function renderStudents(list = students) {
   tableBody.innerHTML = "";
@@ -70,7 +99,7 @@ function renderStudents(list = students) {
 }
 
 
-// 4. COMPTEURS
+// COMPTEURS
 
 function updateStats() {
   totalCount.textContent = students.length;
@@ -79,7 +108,7 @@ function updateStats() {
 }
 
 
-// 5. MODAL
+//  MODAL
 
 function openModal(mode = "add") {
   modal.classList.remove("hidden");
@@ -103,7 +132,7 @@ function closeModal() {
 }
 
 
-// 6. VIEW
+//  VIEW
 
 function viewStudent(id) {
   const student = students.find(s => s.id === id);
@@ -113,7 +142,12 @@ function viewStudent(id) {
 }
 
 
+<<<<<<< HEAD
 // 7. EDIT
+=======
+
+//  EDIT
+>>>>>>> 67bf7a8c1849670103cabf3df6f50351860b77b9
 
 function editStudent(id) {
   const student = students.find(s => s.id === id);
@@ -123,10 +157,15 @@ function editStudent(id) {
   inputId.value = id;
 }
 
+<<<<<<< HEAD
 
 // 8. AJOUT / MODIFICATION
 
 form.addEventListener("submit", function (e) {
+=======
+//  AJOUT / MODIFICATION
+form.addEventListener("submit", function(e) {
+>>>>>>> 67bf7a8c1849670103cabf3df6f50351860b77b9
   e.preventDefault();
   const id = inputId.value;
 
@@ -134,7 +173,7 @@ form.addEventListener("submit", function (e) {
     inputStatus.value === "Active" ? "Active" : "Inactive";
 
   if (id === "") {
-    // AJOUT
+    // L'AJOUT
     students.push({
       id: nextId,
       name: inputName.value,
@@ -152,14 +191,18 @@ form.addEventListener("submit", function (e) {
     student.group = inputGroup.value;
     student.status = statusValue;
   }
+<<<<<<< HEAD
 
+=======
+saveToLocalStorage();
+>>>>>>> 67bf7a8c1849670103cabf3df6f50351860b77b9
   saveToLocalStorage();
   renderStudents();
   closeModal();
 });
 
 
-// 9. SUPPRIMER
+//  SUPPRIMER
 
 function deleteStudent(id) {
   if (!confirm("Supprimer cet étudiant ?")) return;
@@ -169,7 +212,7 @@ function deleteStudent(id) {
 }
 
 
-// 10. OUTILS
+//  OUTILS
 
 function fillForm(student) {
   inputName.value = student.name;
@@ -186,7 +229,7 @@ function enableInputs(active) {
 }
 
 
-// 11. RECHERCHE
+// RECHERCHE
 
 searchInput.addEventListener("input", function () {
   const text = this.value.toLowerCase();
@@ -197,6 +240,10 @@ searchInput.addEventListener("input", function () {
 
 
 // 12. DÉMARRAGE
+<<<<<<< HEAD
 
+=======
+//  DEMARRAGE
+>>>>>>> 67bf7a8c1849670103cabf3df6f50351860b77b9
 loadFromLocalStorage();
 renderStudents();
