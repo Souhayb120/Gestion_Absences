@@ -1,5 +1,4 @@
 // 1. DONNÉES
-=======
 
 // DONNEES
 
@@ -48,9 +47,7 @@ function loadFromLocalStorage() {
 
 
 // 2. ÉLÉMENTS HTML
-=======
 
-// ELEMENTS HTML ,,,
 
 const tableBody = document.getElementById("studentTableBody");
 const modal = document.getElementById("studentModal");
@@ -235,4 +232,4 @@ searchInput.addEventListener("input", function () {
 
 //  DEMARRAGE
 loadFromLocalStorage();
-renderStudents();
+renderStudents()});
