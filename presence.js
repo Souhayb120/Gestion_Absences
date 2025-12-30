@@ -153,7 +153,7 @@ function searchStudents(text) {
 //  INIT
 
 document.addEventListener("DOMContentLoaded", function () {
-  updateEtudiantsFromStudents(); // <- synchroniser students vers attendance
+  updateEtudiantsFromStudents(); 
   showStudents();
   loadAttendanceForDate();
 
