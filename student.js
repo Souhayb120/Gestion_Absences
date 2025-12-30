@@ -115,15 +115,17 @@ function openModal(mode = "add") {
   form.reset();
   inputId.value = "";
   enableInputs(true);
+  modalTitle.textContent = mode === "add" ? "Ajouter un étudiant" : modalTitle.textContent;
+
+
 
   if (mode === "view") {
-    enableInputs(false);
-    form.querySelector("button[type='submit']").style.display = "none";
-    modalTitle.textContent = "Détails de l'étudiant";
+    enableInputs(false); // rendre les champs lecture seule
+    form.querySelector("button[type='submit']").style.display = "none"; // pour cacher le bouton enregistrer
   } else {
-    form.querySelector("button[type='submit']").style.display = "block";
-    modalTitle.textContent =
-      mode === "add" ? "Ajouter un étudiant" : "Modifier l'étudiant";
+    enableInputs(true);
+    form.querySelector("button[type='submit']").style.display = "block"; // montrer le bouton
+    modalTitle.textContent = mode === "add" ? "Ajouter un étudiant" : "Modifier l'étudiant";
   }
 }
 
@@ -138,7 +140,12 @@ function viewStudent(id) {
   const student = students.find(s => s.id === id);
   if (!student) return;
   openModal("view");
+  modalTitle.textContent = "Détails de l'étudiant";
   fillForm(student);
+  enableInputs(false); // rendre les champs lecture seule
+  form.querySelector("button[type='submit']").style.display = "none"; // pour cacher le bouton enregistrer
+
+
 }
 
 
@@ -191,11 +198,7 @@ form.addEventListener("submit", function(e) {
     student.group = inputGroup.value;
     student.status = statusValue;
   }
-<<<<<<< HEAD
-
-=======
 saveToLocalStorage();
->>>>>>> 67bf7a8c1849670103cabf3df6f50351860b77b9
   saveToLocalStorage();
   renderStudents();
   closeModal();
@@ -240,9 +243,6 @@ searchInput.addEventListener("input", function () {
 
 
 // 12. DÉMARRAGE
-<<<<<<< HEAD
-
-=======
 //  DEMARRAGE
 >>>>>>> 67bf7a8c1849670103cabf3df6f50351860b77b9
 loadFromLocalStorage();
