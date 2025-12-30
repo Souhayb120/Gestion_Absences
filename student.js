@@ -139,7 +139,7 @@ function closeModal() {
 function viewStudent(id) {
   const student = students.find(s => s.id === id);
   if (!student) return;
-  openModal("view");
+  openModal();
   modalTitle.textContent = "Détails de l'étudiant";
   fillForm(student);
   enableInputs(false); // rendre les champs lecture seule
@@ -149,19 +149,19 @@ function viewStudent(id) {
 }
 
 
-<<<<<<< HEAD
-// 7. EDIT
-=======
 
 //  EDIT
->>>>>>> 67bf7a8c1849670103cabf3df6f50351860b77b9
 
 function editStudent(id) {
   const student = students.find(s => s.id === id);
   if (!student) return;
   openModal("edit");
+  modalTitle.textContent = "Modifier l'étudiant";
   fillForm(student);
+    enableInputs(true);
   inputId.value = id;
+ form.querySelector("button[type='submit']").style.display = "block"; // pour cacher le bouton enregistrer
+
 }
 
 <<<<<<< HEAD
@@ -198,7 +198,6 @@ form.addEventListener("submit", function(e) {
     student.group = inputGroup.value;
     student.status = statusValue;
   }
-saveToLocalStorage();
   saveToLocalStorage();
   renderStudents();
   closeModal();
@@ -241,9 +240,6 @@ searchInput.addEventListener("input", function () {
   );
 });
 
-
-// 12. DÉMARRAGE
 //  DEMARRAGE
->>>>>>> 67bf7a8c1849670103cabf3df6f50351860b77b9
 loadFromLocalStorage();
 renderStudents();
